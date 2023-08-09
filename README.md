@@ -1,17 +1,16 @@
-# Getting Started with Create React App
+# Тестовое задание (Softer)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Запуск проекта на локальном сервере
 
-В файле .env измените REACT_APP_CLIENT_ID на Ваш ClientID, и REACT_APP_CLIENT_SECRET на Ваш Client Secret.
+Подставьте свой Яндекс clientID и Client Secret в переменные REACT_APP_CLIENT_ID и REACT_APP_CLIENT_SECRET в файле .env
 
-## Available Scripts
+Установите все необходимые зависимости:
 
-In the project directory, you can run:
+npm install
 
-### `npm start`
+Запустите приложение в режиме разработки:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+npm start
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Перейдите по адресу: http://localhost:3000
+
