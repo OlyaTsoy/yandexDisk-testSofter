@@ -36,7 +36,7 @@ const Files = ({ accessToken }) => {
     <section className="files">
       <h2>Файлы</h2>
       <div className="files__grid">
-        {files?.map((file) => {
+        {files.map((file) => {
           return <File key={file.resource_id} file={file} />
         })}
       </div>

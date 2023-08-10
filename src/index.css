@@ -157,3 +157,105 @@ p:hover {
   background-color: #262222;
   color: #b2adad;
 }
+
+/* Progressbar */
+.progressbar {
+  display: flex;
+  flex-direction: column;
+  width: 430px;
+  position: fixed;
+  bottom: 0%;
+  right: 2%;
+  transition: 0.5s ease-in all;
+}
+
+.progressbar-hidden {
+  transform: translateY(100%);
+}
+
+.progressbar__header {
+  position: relative;
+  background-color: #262222;
+  border-radius: 10px 10px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 17px;
+  color: #ffffff;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.progressbar__loaded-total {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.progressbar__btn {
+  display: flex;
+}
+
+.progressbar__collapse {
+  color: #ffffff;
+  cursor: pointer;
+  margin-right: 22px;
+}
+
+.progressbar__collapse:hover {
+  color: #b2adad;
+}
+
+.progressbar__close {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.progressbar__close:hover {
+  color: #b2adad;
+}
+
+.progressbar__wrapper {
+  background-color: #f0f0f0;
+  padding-bottom: 20px;
+  height: 36vh;
+  overflow-y: auto;
+  transition: 0.5s;
+}
+
+.progressbar__wrapper-collapsed {
+  height: 0;
+  padding: 0;
+}
+
+.progressbar__upload {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px;
+}
+
+.progressbar__file {
+  display: inline-block;
+  height: 2.5em;
+  width: 78%;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.progressbar__loadingBar {
+  position: relative;
+  overflow: hidden;
+  width: 150px;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #bac1c7;
+}
+
+.progressbar__loaded {
+  height: 100%;
+  transition: 0.1s;
+  background-color: #4796e1;
+}

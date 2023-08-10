@@ -1,47 +1,50 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
 import Dropzone from 'react-dropzone';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFiles } from "../slice/filesSlice";
+import Progressbar from "./Progressbar";
+import { setUploadsFiles, setUploadStatus } from "../slice/uploadsFilesSlice";
 
 const Uploads = ({ accessToken }) => {
-  const [uploadFiles, setUploadFiles] = useState([]);
+  const uploadFiles = useSelector((state) => state.uploadsFiles.uploadsFiles);
 
   const dispatch = useDispatch();
 
   // Функция для загрузки файла на Яндекс.Диск
   const uploadFile = async (url, file) => {
-    const uploadResponse = await axios({
+    await axios({
       method: 'PUT',
       url,
       data: {
-        file,
+        file: file.fileData,
       },
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    })
-    return uploadResponse;
-  }
+      onUploadProgress: (progressEvent) => {
+        dispatch(setUploadStatus({ path: file.fileData.path, status: progressEvent.progress }))
+      }
+    });
+  };
 
   const getFilesData = async () => {
-      const uploadResponse = await axios({
-        method: 'GET',
-        url: `${process.env.REACT_APP_API_URL}/files`,
-        params: {
-          limit: 100,
-          media_type: "audio, book, image, compressed, development, flash, font, text, unknown, video, web",
-          preview_size: "S",
-          preview_crop: true,
-        },
-        headers: {
-          Authorization: `OAuth ${accessToken}`,
-        },
-      })
-      if (uploadResponse.status === 200) {
-        dispatch(setFiles(uploadResponse.data.items));
-      }
+    const uploadResponse = await axios({
+      method: 'GET',
+      url: `${process.env.REACT_APP_API_URL}/files`,
+      params: {
+        limit: 100,
+        media_type: "audio, book, image, compressed, development, flash, font, text, unknown, video, web",
+        preview_size: "S",
+        preview_crop: true,
+      },
+      headers: {
+        Authorization: `OAuth ${accessToken}`,
+      },
+    });
+    if (uploadResponse.status === 200) {
+      dispatch(setFiles(uploadResponse.data.items));
+    }
   };
 
   const getUploadUrl = () => {
@@ -50,7 +53,7 @@ const Uploads = ({ accessToken }) => {
         method: 'GET',
         url: `${process.env.REACT_APP_API_URL}/upload`,
         params: {
-          path: file.path,
+          path: file.fileData.path,
           overwrite: true,
         },
         headers: {
@@ -62,12 +65,13 @@ const Uploads = ({ accessToken }) => {
       await uploadFile(uploadUrl, file);
       await getFilesData();
     });
-    setUploadFiles([]);
   };
 
   // Функция обработки выбранного файла
   const handleFileChange = (acceptedFiles) => {
-    setUploadFiles(acceptedFiles);
+    dispatch(setUploadsFiles(acceptedFiles.map((obj) => {
+      return { status: 0, fileData: obj }
+    })));
   };
 
   return (
@@ -81,16 +85,7 @@ const Uploads = ({ accessToken }) => {
           </div>
         )}
       </Dropzone>
-        {uploadFiles.length > 0 ? uploadFiles.map((file) => {
-          if (uploadFiles.length === 1) {
-            return (
-              <p>Выбранный файл: {file.name}</p>
-            )
-          }
-            return (
-              <p>Выбранные файлы: {file.name}</p>
-            )
-        }) : ''}
+      <Progressbar />
       <button className="btn" onClick={getUploadUrl}>
         Загрузить на Яндекс.Диск
       </button>

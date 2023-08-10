@@ -7,7 +7,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
+      <div className="container">
       <h1 className="title">Войти в Яндекс Диск</h1>
       <button className="btn" onClick={handleLogin}>Войти с помощью Яндекс</button>
     </div>

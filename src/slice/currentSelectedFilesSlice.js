@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const currentSelectedFilesSlice = createSlice({
-  name: 'currentSelected',
+  name: 'currentSelectedFiles',
   initialState,
   reducers: {
     selectFile(state, action) {

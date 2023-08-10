@@ -51,7 +51,7 @@ const DeleteToolbar = ({accessToken}) => {
 
   return (
     <div className={`delete ${currentSelected.length > 0 ? "" : "hidden"}`}>
-      <span>{`Выбрано: ${currentSelected.length} файлов`}</span>
+      <span>{`Выбрано файлов: ${currentSelected.length}`}</span>
       <div>
         <button className="delete__btn" onClick={deleteFiles}>Удалить</button>
         <button className="deselect__btn" onClick={deselectFiles}>Х</button>

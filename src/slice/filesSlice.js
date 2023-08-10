@@ -10,7 +10,7 @@ const filesSlice = createSlice({
   reducers: {
     setFiles(state, action) {
       state.files = action.payload;
-    }
+    },
   }
 });
 

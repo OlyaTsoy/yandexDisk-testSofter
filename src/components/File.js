@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 const File = ({ file }) => {
   const currentSelected = useSelector((state) => state.currentSelected.currentSelectedFiles);
-
   const dispatch = useDispatch();
 
   const toggleSelection = () => {
@@ -13,7 +12,7 @@ const File = ({ file }) => {
 
   return (
     <div className={`file__container ${currentSelected.includes(file.path) ? "file__selected" : ""}`} onClick={toggleSelection}>
-      <img src={file.preview || 'https://placehold.co/100x100'}></img>
+      <img src={file.preview || 'https://placehold.co/100x100'} className="file__preview"></img>
       <span className="file__name">{file.name}</span>
     </div>
   )

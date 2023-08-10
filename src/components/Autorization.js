@@ -33,7 +33,7 @@ const Autorization = () => {
   }, []);
 
   return (
-    <div className="container">
+      <div className="container">
       <h1 className="title">Авторизация...</h1>
     </div>
   );
